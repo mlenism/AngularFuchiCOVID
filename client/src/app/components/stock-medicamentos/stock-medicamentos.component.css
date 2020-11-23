@@ -1,0 +1,60 @@
+.content {
+  display: flex;
+  margin: 82px auto 32px;
+  padding: 0 16px;
+  max-width: 960px;
+  flex-direction: column;
+  align-items: center;
+  font-family: calibri;
+  overflow: hidden;
+}
+
+.items {
+  width: fit-content;
+  float: left;
+}
+
+table{
+  table-layout: fixed;
+  width: 500px;
+  overflow-wrap: break-word;
+  border-collapse: collapse;
+  font-size: 20px;
+  margin-left: 12px;
+}
+
+th {
+  background-color: #1f497d;
+  color:white;
+}
+
+td {
+  background-color: whitesmoke;
+}
+
+td, th {
+  border: 2px solid black;
+}
+
+#contenido tr:hover td{
+  background-color: lightgray;
+}
+
+h3 {
+  margin-top: 0%;
+  margin-bottom: 0%;
+  height: 28px;
+}
+
+#laboratorios {
+  margin-top: 30px;
+}
+
+button {
+  width : 333px;
+  padding: 3px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-left: 324px;
+}

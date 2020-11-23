@@ -1,0 +1,64 @@
+<div class="registro">
+  <form [formGroup]="form">
+    <h2>Registrar persona relacionada con {{paciente.nombre}} {{paciente.apellido}}</h2>
+
+    <button (click)="crear($event)" [disabled]="form.invalid">CREAR</button>
+    <button (click)="actualizar($event)" [disabled]="form.invalid">ACTUALIZAR</button>
+    <button (click)="borrar($event)" [disabled]="form.invalid">BORRAR</button>
+    <button (click)=volver($event)>VOLVER</button>
+
+    <table>
+      <tr>
+        <td>
+          <input type="text" formControlName="id">
+        </td>
+        <td>
+          <input type="text" formControlName="nombre">
+        </td>
+        <td>
+          <input type="text" formControlName="apellido">
+        </td>
+        <td>
+          <input type="text" formControlName="email">
+        </td>
+        <td>
+          <input type="text" formControlName="telefono">
+        </td>
+        <td>
+          <input type="text" formControlName="parentesco">
+        </td>
+        <td>
+          <select formControlName="tipoID">
+            <option *ngFor="let tipoid of tipoIDlist" value={{tipoid.id}}>{{tipoid.nombre}}</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+
+    <table id="contenido">
+      <thead>
+        <tr>
+          <th>IDENTIFICACIÓN</th>
+          <th>NOMBRE</th>
+          <th>APELLIDO</th>
+          <th>EMAIL</th>
+          <th>TELEFONO</th>
+          <th>PARENTESCO</th>
+          <th>TIPO DE ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let familiar of familiarList" (click)="editar(familiar)">
+          <td>{{familiar.id}}</td>
+          <td>{{familiar.nombre}}</td>
+          <td>{{familiar.apellido}}</td>
+          <td>{{familiar.email}}</td>
+          <td>{{familiar.telefono}}</td>
+          <td>{{familiar.parentesco}}</td>
+          <td>{{familiar.tipoID}}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+  </form>
+</div>

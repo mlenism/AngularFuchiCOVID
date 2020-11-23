@@ -1,0 +1,28 @@
+<div class="content">
+  <h2>{{saludo}}</h2>
+  <form ngNoForm>
+    <fieldset>
+
+      <legend>Gestion</legend>
+
+      <app-cuadro-de-entrada id=primero mensaje={{primerCuadro}} enlace={{primerLink}}></app-cuadro-de-entrada>
+
+      <app-cuadro-de-entrada id=segundo mensaje={{segundoCuadro}} enlace={{segundoLink}}></app-cuadro-de-entrada>
+
+    </fieldset>
+  </form>
+  <div id=botones>
+
+    <button id=boton1 routerLink='/Mapa'>
+      <span>Ver mapa de pacientes contagiado</span>
+    </button>
+
+    <button routerLink='/Informe'>
+      <span>Ver Informe</span>
+    </button>
+
+  </div>
+  <button (click)="cerrar()" id="cerrar">
+    <span>Cerrar sesión</span>
+  </button>
+</div>

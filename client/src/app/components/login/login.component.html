@@ -1,0 +1,11 @@
+<div class="inicio-sesion">
+  <form [formGroup]="form" (ngSubmit)="login($event)">
+    
+      <input type="text" placeholder="Identificación" formControlName="id">
+    
+      <input type="password" placeholder="Contraseña" formControlName="password">
+    
+      <input type="submit" value="Iniciar Sesión" [disabled]="form.invalid">
+                  
+  </form>
+</div>

@@ -1,0 +1,80 @@
+<div class="registro">
+  <form [formGroup]="form">
+    <h2>Resgitrar paciente
+      <button id="btn-registro" (click)="regPersonaRelacionada($event)" [disabled]="form.invalid">REGISTRAR FAMILIAR</button>
+    </h2>
+
+    <button (click)="crear($event)" [disabled]="form.invalid">CREAR</button>
+    <button (click)="actualizar($event)" [disabled]="form.invalid">ACTUALIZAR</button>
+    <button (click)="borrar($event)" [disabled]="form.invalid">BORRAR</button>
+    <button routerLink="/SecSalud">VOLVER</button>
+
+    <table>
+      <tr>
+        <td>
+          <input type="text" formControlName="id">
+        </td>
+        <td>
+          <input type="text" formControlName="nombre">
+        </td>
+        <td>
+          <input type="text" formControlName="apellido">
+        </td>
+        <td>
+          <select formControlName="medico">
+            <option *ngFor="let medico of medicoList" value={{medico.id}}>{{medico.nombre}}</option>
+          </select>
+        </td>
+        <td>
+          <input type="text" formControlName="direccion">
+        </td>
+        <td>
+          <select formControlName="barrio">
+            <option *ngFor="let barrio of barrioList" value={{barrio.id}}>{{barrio.nombre}}</option>
+          </select>
+        </td>
+        <td>
+          <select formControlName="tipoID">
+            <option *ngFor="let tipoid of tipoIDlist" value={{tipoid.id}}>{{tipoid.nombre}}</option>
+          </select>
+        </td>
+        <td>
+          <input type="text" formControlName="integrantes">
+        </td>
+        <td>
+          <input type="text" formControlName="ciudad">
+        </td>
+      </tr>
+    </table>
+
+    <table id="contenido">
+      <thead>
+        <tr>
+          <th>IDENTIFICACIÓN</th>
+          <th>NOMBRE</th>
+          <th>APELLIDO</th>
+          <th>MEDICO</th>
+          <th>DIRECCION</th>
+          <th>BARRIO</th>
+          <th>TIPO DE ID</th>
+          <th>No INTEGRANTES</th>
+          <th>CIUDAD DE CONTAGIO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let paciente of pacienteList" (click)="editar(paciente)">
+          <td>{{paciente.id}}</td>
+          <td>{{paciente.nombre}}</td>
+          <td>{{paciente.apellido}}</td>
+          <td>{{paciente.medico}}</td>
+          <td>{{paciente.direccion}}</td>
+          <td>{{paciente.barrio}}</td>
+          <td>{{paciente.tipoID}}</td>
+          <td>{{paciente.integrantes}}</td>
+          <td>{{paciente.ciudad}}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+  </form>
+</div>

@@ -1,0 +1,55 @@
+.registro {
+  width: 1200px;
+  height: 400px;
+  display: flex;
+  margin: 82px auto 0px;
+  padding: 23px;
+  flex-direction: column;
+  align-items: center;
+  font-family: calibri;
+}
+
+table{
+  margin-top: 30px;
+  table-layout: fixed;
+  width: 100%;
+  overflow-wrap: break-word;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+th {
+  background-color: #1f497d;
+  color:white;
+}
+
+td, select, input{
+  background-color: whitesmoke;
+}
+
+td, th{
+  border: 2px solid black;
+}
+
+#contenido tr:hover td{
+  background-color: lightgray;
+}
+
+button {
+  width : 25%;
+  padding: 3px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+select, input {
+  width : 98%;
+  overflow-wrap: break-word;
+  font-size: 13px;
+  border-width: 0px;
+}
+
+#btn-registro {
+  width: 75%;
+  margin-left: 114px;
+}

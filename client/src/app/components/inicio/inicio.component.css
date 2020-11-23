@@ -1,0 +1,37 @@
+.content {
+  display: flex;
+  margin: 82px auto 32px;
+  padding: 0 16px;
+  max-width: 960px;
+  flex-direction: column;
+  align-items: center;
+  font-family: calibri;
+}
+
+#primero {
+  margin-right: 20px;
+}
+
+button {
+  display: inline-flex;
+  width: 190px;
+  height: 51px;
+  display: inline-blo;
+  padding: 7px;
+  margin-top: 20px;
+  flex-direction: column;
+  align-items: center;
+}
+
+#botones{
+  width: 400px;
+}
+
+#boton1{
+  margin-right: 20px;
+}
+
+#cerrar{
+  width: 400px;
+  height: 35px;
+}

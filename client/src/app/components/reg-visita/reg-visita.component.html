@@ -1,0 +1,77 @@
+<div class="registro">
+  <form [formGroup]="form">
+    <h2>Registrar visita</h2>
+
+    <div id="Options">
+      <label for="Paciente">Paicente: </label>
+      <select name="Paciente" formControlName="paciente">
+        <option *ngFor="let paciente of pacienteList" value={{paciente.id}}>{{paciente.nombre}}</option>
+      </select>
+      <label for="Laboratorio">Laboratorio: </label>
+      <select (click)="tryGetStock()" name="Laboratorio" formControlName="laboratorio">
+        <option *ngFor="let laboratorio of laboratorioList" value={{laboratorio.id}}>{{laboratorio.nombre}}</option>
+      </select>
+      <label for="Medicamento">Medicamento: </label>
+      <select (click)="tryGetStock()" name="Medicamento" formControlName="medicamento">
+        <option *ngFor="let medicamento of medicamentoList" value={{medicamento.id}}>{{medicamento.nombre}}</option>
+      </select>
+      <label for="Stock">Stock: </label> 
+      <span name="Stock">{{stock}}</span>
+    </div>
+
+    <button (click)="crear($event)" [disabled]="form.invalid">CREAR</button>
+    <button (click)="actualizar($event)" [disabled]="form.invalid">ACTUALIZAR</button>
+    <button (click)="borrar($event)" [disabled]="form.invalid">BORRAR</button>
+    <button routerLink="/ProfesionalSalud">VOLVER</button>
+
+    <table>
+      <tr>
+        <td>
+          <input type="text" placeholder="temperatura" formControlName="temperatura">
+        </td>
+        <td>
+          <input type="text" placeholder="peso" formControlName="peso">
+        </td>
+        <td>
+          <input type="text" placeholder="presion" formControlName="presion">
+        </td>
+        <td>
+          <input type="text"  placeholder="dosis" formControlName="dosis">
+        </td>
+        <td>
+          <input type="text" placeholder="observaciones" formControlName="observaciones">
+        </td>
+      </tr>
+    </table>
+
+    <table id="contenido">
+      <thead>
+        <tr>
+          <th>PACIENTE</th>
+          <th>TEMPERATURA °C</th>
+          <th>PESO Kg</th>
+          <th>PRESION ARTERIAL mmHG</th>
+          <th>FECHA DE REGISTRO</th>
+          <th>HORA DE REGISTRO</th>
+          <th>MEDICAMENTO</th>
+          <th>DOSIS DIARIA g</th>
+          <th>OBSERVACIONES</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let visita of visitaList" (click)="editar(visita)">
+          <td>{{visita.paciente}}</td>
+          <td>{{visita.temperatura}}</td>
+          <td>{{visita.peso}}</td>
+          <td>{{visita.presionArterial}}</td>
+          <td>{{visita.fecha}}</td>
+          <td>{{visita.hora}}</td>
+          <td>{{visita.medicamento}}</td>
+          <td>{{visita.dosisDiaria}}</td>
+          <td>{{visita.observaciones}}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+  </form>
+</div>

@@ -1,0 +1,45 @@
+<div class=content>
+  <h2>Stock medicamentos</h2>
+  <div>
+    <div class="items">
+      <div id = laboratorios>
+        <h3>{{stockList[0].laboratorio}}</h3>
+        <h3>{{stockList[3].laboratorio}}</h3>
+        <h3>{{stockList[6].laboratorio}}</h3>
+        <h3>{{stockList[9].laboratorio}}</h3>
+      </div>
+    </div>
+    <div class="items">
+      <table id="contenido">
+        <thead>
+          <th>Mixamorranilo300</th>
+          <th>Choclometanol800</th>
+          <th>Chichanosol800</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{stockList[0].stock}}</td>
+            <td>{{stockList[1].stock}}</td>
+            <td>{{stockList[2].stock}}</td>
+          </tr>
+          <tr>
+            <td>{{stockList[3].stock}}</td>
+            <td>{{stockList[4].stock}}</td>
+            <td>{{stockList[5].stock}}</td>
+          </tr>
+          <tr>
+            <td>{{stockList[6].stock}}</td>
+            <td>{{stockList[7].stock}}</td>
+            <td>{{stockList[8].stock}}</td>
+          </tr>
+          <tr>
+            <td>{{stockList[9].stock}}</td>
+            <td>{{stockList[10].stock}}</td>
+            <td>{{stockList[11].stock}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <button routerLink="/ProfesionalSalud">Volver</button>
+</div>
