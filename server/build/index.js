@@ -15,15 +15,10 @@ const MiembroSecretariaSaludRoutes_1 = __importDefault(require("./routes/Miembro
 const FamiliarRoutes_1 = __importDefault(require("./routes/FamiliarRoutes"));
 const LaboratorioMedicamentoRoutes_1 = __importDefault(require("./routes/LaboratorioMedicamentoRoutes"));
 const ProfesionalSaludRoutes_1 = __importDefault(require("./routes/ProfesionalSaludRoutes"));
-const UbicacionProfesionalSaludRoutes_1 = __importDefault(require("./routes/UbicacionProfesionalSaludRoutes"));
 const PacienteRoutes_1 = __importDefault(require("./routes/PacienteRoutes"));
-const UbicacionPacienteRoutes_1 = __importDefault(require("./routes/UbicacionPacienteRoutes"));
-const PacienteFamiliarRoutes_1 = __importDefault(require("./routes/PacienteFamiliarRoutes"));
-const RegistroProfesionalSaludRoutes_1 = __importDefault(require("./routes/RegistroProfesionalSaludRoutes"));
-const RegistroPacienteRoutes_1 = __importDefault(require("./routes/RegistroPacienteRoutes"));
 const VisitaRoutes_1 = __importDefault(require("./routes/VisitaRoutes"));
-const VisitaDosisDiariaRoutes_1 = __importDefault(require("./routes/VisitaDosisDiariaRoutes"));
 const EstadiasticasRouter_1 = __importDefault(require("./routes/EstadiasticasRouter"));
+const UbicacionPacienteRoutes_1 = __importDefault(require("./routes/UbicacionPacienteRoutes"));
 class Server {
     constructor() {
         this.app = express_1.default();
@@ -47,15 +42,10 @@ class Server {
         this.app.use('/familiar', FamiliarRoutes_1.default);
         this.app.use('/laboratorio-medicamentos', LaboratorioMedicamentoRoutes_1.default);
         this.app.use('/profesionalSalud', ProfesionalSaludRoutes_1.default);
-        this.app.use('/ubiProfesionalSalud', UbicacionProfesionalSaludRoutes_1.default);
         this.app.use('/pacientes', PacienteRoutes_1.default);
-        this.app.use('/ubipacientes', UbicacionPacienteRoutes_1.default);
-        this.app.use('/paciente-familiar', PacienteFamiliarRoutes_1.default);
-        this.app.use('/registroProfesionalSalud', RegistroProfesionalSaludRoutes_1.default);
-        this.app.use('/registroPaciente', RegistroPacienteRoutes_1.default);
         this.app.use('/visita', VisitaRoutes_1.default);
-        this.app.use('/visitaDosis', VisitaDosisDiariaRoutes_1.default);
         this.app.use('/estadisticas', EstadiasticasRouter_1.default);
+        this.app.use('/ubicacion-pacientes', UbicacionPacienteRoutes_1.default);
     }
     start() {
         this.app.listen(3000, () => {

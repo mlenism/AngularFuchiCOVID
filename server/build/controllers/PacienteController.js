@@ -1,36 +1,38 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const database_1 = require("../database");
 class PacienteController {
     async getPacientes(req, res) {
         try {
-            // const pacientes: QueryResult = await pool.query('SELECT * FROM paciente ORDER BY (id) ASC');
-            // return res.status(200).json(pacientes.rows);
-            const listaDePrueba = [
-                {
-                    id: "1344111111",
-                    nombre: "nombre_paciente1",
-                    apellido: "apellido_paciente1",
-                    medico: "nombre_profesional1 apellido_profesional1",
-                    idMedico: "1244111111",
-                    direccion: "Cra 2b #50-61",
-                    barrio: "Terrón Colorado",
-                    idBarrio: "1",
-                    geolocalizacion: "3°28 02.3 N 76°30 05.8 W",
-                    tipoID: "cedula de ciudadanía",
-                    idTipoID: "1",
-                    integrantes: "1",
-                    ciudad: "Cali"
-                }
-            ];
-            return res.status(200).json(listaDePrueba);
+            const pacientes = await database_1.pool.query('SELECT * FROM paciente ORDER BY (id) ASC');
+            return res.status(200).json(pacientes.rows);
         }
         catch (e) {
             console.log(e);
             return res.status(500).json('Internal server error');
         }
     }
-    async setPacientes(req, res) {
+    async getOne(req, res) {
         try {
+            const { id } = req.params;
+            const paciente = await database_1.pool.query('SELECT * FROM paciente WHERE id = $1', [id]);
+            if (paciente.rows.length > 0) {
+                return res.status(200).json(paciente.rows);
+            }
+            else {
+                return res.send('Paciente no encontrado');
+            }
+        }
+        catch (e) {
+            console.log(e);
+            return res.status(500).json('Internal server error');
+        }
+    }
+    async postPacientes(req, res) {
+        try {
+            const { id, nombre, apellido, id_tipodID, numeroDeIntegrantes, ciudad_contagio, id_medico } = req.body;
+            await database_1.pool.query('INSERT INTO paciente {id, nombre, apellido, id_tipoId, numeroDeIntegrantes, ciudad_contagio, id_medico} VALUES{$1, $2, $3, $4, $5, $6, $7}'),
+                [id, nombre, apellido, id_tipodID, numeroDeIntegrantes, ciudad_contagio, id_medico];
             console.log(req.body);
             return res.status(200).send('INSERTADO');
         }
@@ -39,8 +41,11 @@ class PacienteController {
             return res.status(500).json('Internal server error');
         }
     }
-    async updatePacientes(req, res) {
+    async putPacientes(req, res) {
         try {
+            const { id, nombre, apellido, id_tipodID, numeroDeIntegrantes, ciudad_contagio, id_medico } = req.body;
+            await database_1.pool.query('UPDATE paciente nombre = $1, apellido = $2, id_tipoId = $3, numeroDeIntegrantes = $4, ciudad_contagio = $5, id_medico = $6 WHERE id = $7'),
+                [nombre, apellido, id_tipodID, numeroDeIntegrantes, ciudad_contagio, id_medico, id];
             console.log(req.body);
             return res.status(200).send('ACTUALIZADO');
         }
@@ -51,8 +56,9 @@ class PacienteController {
     }
     async deletePaciente(req, res) {
         try {
-            const { id } = req.params;
-            console.log(id);
+            const { id } = req.body;
+            await database_1.pool.query('DELETE FROM paciente WHERE id = $1', [id]);
+            console.log(req.body);
             return res.status(200).send('BORRADO');
         }
         catch (e) {

@@ -12,6 +12,10 @@ class BarriosRoutes {
     
     config() {
         this.router.get('/', barriosController.getBarrios);
+        this.router.get('/:id', barriosController.getOne)
+        this.router.put('/', barriosController.putBarrio);
+        this.router.post('/', barriosController.postBarrio);
+        this.router.post('/delete', barriosController.deleteBarrio);
     }
 }
 

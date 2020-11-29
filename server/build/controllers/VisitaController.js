@@ -1,67 +1,38 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const database_1 = require("../database");
 class VisitaController {
     async getVisitas(req, res) {
         try {
-            // const visitas: QueryResult = await pool.query('SELECT * FROM visita ORDER BY (id) ASC');
-            // return res.status(200).json(visitas.rows);
-            const listaDePrueba = [
-                {
-                    id: '1',
-                    idProfesional: '1244111111',
-                    idpaciente: '1344111111',
-                    paciente: 'nombre_paciente1 apellido_paciente1',
-                    temperatura: '36.25',
-                    peso: '60',
-                    presionArterial: '155/80',
-                    fecha: '2020-11-23',
-                    hora: '07:42:50.238542',
-                    medicamento: 'Mixamorranilo300',
-                    idMedicamento: '1',
-                    laboratorio: 'labo1',
-                    idlaboratorio: '1',
-                    dosisDiaria: '2',
-                    observaciones: 'ninguna'
-                }
-            ];
-            return res.status(200).json(listaDePrueba);
+            const visitas = await database_1.pool.query('SELECT * FROM visita ORDER BY (id) ASC');
+            return res.status(200).json(visitas.rows);
         }
         catch (e) {
             console.log(e);
             return res.status(500).json('Internal server error');
         }
     }
-    async getVisitaPacientes(req, res) {
+    async getOne(req, res) {
         try {
-            // const visitas: QueryResult = await pool.query('SELECT * FROM visita ORDER BY (id) ASC');
-            // return res.status(200).json(visitas.rows);
-            const listaDePrueba = [
-                {
-                    id: '1344111111',
-                    nombre: 'nombre_paciente1 apellido_paciente1'
-                },
-                {
-                    id: '1344222222',
-                    nombre: 'nombre_paciente2 apellido_paciente2'
-                },
-                {
-                    id: '1344333333',
-                    nombre: 'nombre_paciente3 apellido_paciente3'
-                },
-                {
-                    id: '1344444444',
-                    nombre: 'nombre_paciente2 apellido_paciente3'
-                }
-            ];
-            return res.status(200).json(listaDePrueba);
+            const { id } = req.params;
+            const visita = await database_1.pool.query('SELECT * FROM visita WHERE id = $1', [id]);
+            if (visita.rows.length > 0) {
+                return res.status(200).json(visita.rows);
+            }
+            else {
+                return res.send('Visita no encontrado');
+            }
         }
         catch (e) {
             console.log(e);
             return res.status(500).json('Internal server error');
         }
     }
-    async setVisita(req, res) {
+    async postVisita(req, res) {
         try {
+            const { id, id_paciente, id_profesional_salud, temperatura, peso, presion_arterial, observaciones, fecha_registro, hora_registro } = req.body;
+            await database_1.pool.query('INSERT INTO visita {id, id_paciente, id_profesional_salud, temperatura, peso, presion_arterial, observaciones, fecha_registro, hora_registro} VALUES {$1, $2, $3, $4, $5, $6, $7, $8, $9}'),
+                [id, id_paciente, id_profesional_salud, temperatura, peso, presion_arterial, observaciones, fecha_registro, hora_registro];
             console.log(req.body);
             return res.status(200).send('INSERTADO');
         }
@@ -70,8 +41,11 @@ class VisitaController {
             return res.status(500).json('Internal server error');
         }
     }
-    async updateVisita(req, res) {
+    async putVisita(req, res) {
         try {
+            const { id, temperatura, peso, presion_arterial, observaciones, fecha_registro, hora_registro } = req.body;
+            await database_1.pool.query('UPDATE visita SET temperatura = $1, peso = $2, presion_arterial = $3, observaciones = $4, fecha_registro = $5, hora_registro = $6'),
+                [temperatura, peso, presion_arterial, observaciones, fecha_registro, hora_registro, id];
             console.log(req.body);
             return res.status(200).send('ACTUALIZADO');
         }
@@ -82,7 +56,8 @@ class VisitaController {
     }
     async deleteVisita(req, res) {
         try {
-            const { id_paciente, id_doctor } = req.body;
+            const { id } = req.body;
+            await database_1.pool.query('DELETE FROM visita WHERE id = $1', [id]);
             console.log(req.body);
             return res.status(200).send('BORRADO');
         }

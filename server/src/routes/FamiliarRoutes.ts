@@ -12,8 +12,9 @@ class FamiliarRoutes {
     
     config() {
         this.router.get('/', familiarController.getFamiliares);
-        this.router.post('/', familiarController.setFamiliar);
-        this.router.put('/', familiarController.updateFamiliar);
+        this.router.get('/:id', familiarController.getOne);
+        this.router.post('/', familiarController.postFamiliar);
+        this.router.put('/', familiarController.putFamiliar);
         this.router.post('/delete', familiarController.deleteFamiliar);
     }
 }

@@ -13,9 +13,10 @@ class ProfesionalSaludRoutes {
     config() {
         this.router.get('/', profesionalSaludController.getProfesionales);
         this.router.get('/full', profesionalSaludController.getProfesionalesFullName)
-        this.router.post('/', profesionalSaludController.setProfesional);
-        this.router.put('/', profesionalSaludController.updateProfesional);
-        this.router.delete('/:id', profesionalSaludController.deleteProfesional);
+        this.router.get('/:id', profesionalSaludController.getOne);
+        this.router.post('/', profesionalSaludController.postProfesional);
+        this.router.put('/', profesionalSaludController.putProfesional);
+        this.router.post('/delete', profesionalSaludController.deleteProfesional);
     }
 }
 

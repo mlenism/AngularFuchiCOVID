@@ -12,6 +12,10 @@ class EntidadDeSaludRoutes {
     
     config() {
         this.router.get('/', entidadDeSaludController.getEntidadesDeSalud);
+        this.router.get('/:id', entidadDeSaludController.getOne);
+        this.router.put('/', entidadDeSaludController.putEntidad);
+        this.router.post('/', entidadDeSaludController.postEntidad);
+        this.router.post('/delete', entidadDeSaludController.postEntidad)
     }
 }
 
