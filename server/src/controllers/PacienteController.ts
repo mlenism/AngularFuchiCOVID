@@ -20,7 +20,6 @@ class PacienteController {
                     idBarrio: "1",
                     latitud: "3.449960",
                     longitud: "-76.510079",
-                    geolocalizacion: "3.449960, -76.510079",
                     tipoID: "cedula de ciudadanía",
                     idTipoID: "1",
                     integrantes: "1",
