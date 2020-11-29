@@ -9,8 +9,9 @@ import { UbicacionPacienteService } from 'src/app/services/ubicacion_paciente.se
 })
 export class MapaComponent implements OnInit {
 
-  lat: number=51;
-  lng: number=8;
+  lat: number=3.425396;
+  lng: number=-76.519767;
+  zoom: number=11.5;
   ubicaciones: any[];
 
   constructor(private router: Router, private ubicacionPacienteService:UbicacionPacienteService) { 

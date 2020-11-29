@@ -84,7 +84,9 @@ export class RegPacienteComponent implements OnInit {
         barrio: ['', [Validators.required]],
         tipoID: ['', [Validators.required]],
         integrantes: ['', [Validators.required]],
-        ciudad: ['', [Validators.required]]
+        ciudad: ['', [Validators.required]],
+        latitud: ['', [Validators.required]],
+        longitud: ['', [Validators.required]]
       }
     );
   }
@@ -136,6 +138,8 @@ export class RegPacienteComponent implements OnInit {
     control.tipoID.setValue(paciente.idTipoID);
     control.integrantes.setValue(paciente.integrantes);
     control.ciudad.setValue(paciente.ciudad);
+    control.latitud.setValue(paciente.latitud);
+    control.longitud.setValue(paciente.longitud);
   }
 
   regPersonaRelacionada(event: Event) {

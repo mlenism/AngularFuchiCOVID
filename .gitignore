@@ -1,6 +1,8 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
+server/src/database.ts
+server/build
 client/dist
 client/tmp
 client/out-tsc

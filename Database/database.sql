@@ -123,7 +123,8 @@ CREATE TABLE ubicacion_paciente
     id_paciente VARCHAR(10) NOT NULL,
     id_barrio SMALLINT NOT NULL,
     direccion VARCHAR(30) NOT NULL,
-    geolocalizacion VARCHAR(30) NOT NULL,
+    latitud NUMERIC(10,8) NOT NULL,
+    longitud NUMERIC(10,8) NOT NULL,
     PRIMARY KEY (id_paciente),
 	  CONSTRAINT "FK_paciente" FOREIGN KEY (id_paciente) REFERENCES paciente(id)
 		ON UPDATE CASCADE
@@ -288,10 +289,10 @@ INSERT INTO paciente VALUES ('1344222222', 'nombre_paciente2', 'apellido_pacient
 INSERT INTO paciente VALUES ('1344333333', 'nombre_paciente3', 'apellido_paciente3', '3', 2, 'Medellin', '1244333333');
 INSERT INTO paciente VALUES ('1344444444', 'nombre_paciente4', 'apellido_paciente4', '4', 3, 'Pereira', '1244444444');
 
-INSERT INTO ubicacion_paciente VALUES ('1344111111', 1, 'Cra 2b #50-61', '3°28 02.3 N 76°30 05.8 W');
-INSERT INTO ubicacion_paciente VALUES ('1344222222', 2, 'Cra 2c #60-72', '3°27 58.8 N 76°29 37.6 W');
-INSERT INTO ubicacion_paciente VALUES ('1344333333', 3, 'Cra 2d #40-83', '3°28 09.2 N 76°29 21.0 W');
-INSERT INTO ubicacion_paciente VALUES ('1344444444', 4, 'Cra 2e #30-94', '3°27 33.2 N 76°30 48.6 W');
+INSERT INTO ubicacion_paciente VALUES ('1344111111', 1, 'Cra 2b #50-61', '3.449960', '-76.510079');
+INSERT INTO ubicacion_paciente VALUES ('1344222222', 2, 'Cra 2c #60-72', '3.417473', '-76.536885');
+INSERT INTO ubicacion_paciente VALUES ('1344333333', 3, 'Cra 2d #40-83', '3.420687', '-76.505447');
+INSERT INTO ubicacion_paciente VALUES ('1344444444', 4, 'Cra 2e #30-94', '3.369205', '-76.529340');
 
 INSERT INTO paciente_familiar VALUES ('1344111111', '1044111111', 'hermano');
 INSERT INTO paciente_familiar VALUES ('1344222222', '1044222222', 'primo');
@@ -320,3 +321,4 @@ INSERT INTO visita(id_paciente, id_profesional_salud, temperatura, peso, presion
 INSERT INTO visita_dosis_diaria(id_laboratorio, id_medicamento, dosis_diaria) VALUES ('1', '1', 2);
 INSERT INTO visita_dosis_diaria(id_laboratorio, id_medicamento, dosis_diaria) VALUES ('1', '2', 5);
 INSERT INTO visita_dosis_diaria(id_laboratorio, id_medicamento, dosis_diaria) VALUES ('2', '1', 6);
+INSERT INTO visita_dosis_diaria(id_laboratorio, id_medicamento, dosis_diaria) VALUES ('1', '2', 6);

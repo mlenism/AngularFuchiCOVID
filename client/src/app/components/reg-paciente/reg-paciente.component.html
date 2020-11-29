@@ -44,6 +44,12 @@
         <td>
           <input type="text" formControlName="ciudad">
         </td>
+        <td>
+          <input type="latitud" formControlName="latitud">
+        </td>
+        <td>
+          <input type="longitud" formControlName="longitud">
+        </td>
       </tr>
     </table>
 
@@ -53,12 +59,13 @@
           <th>IDENTIFICACIÓN</th>
           <th>NOMBRE</th>
           <th>APELLIDO</th>
-          <th>MEDICO</th>
+          <th>MEDICO A CARGO</th>
           <th>DIRECCION</th>
           <th>BARRIO</th>
           <th>TIPO DE ID</th>
           <th>No INTEGRANTES</th>
           <th>CIUDAD DE CONTAGIO</th>
+          <th>GEOLOCALIZACION</th>
         </tr>
       </thead>
       <tbody>
@@ -72,6 +79,7 @@
           <td>{{paciente.tipoID}}</td>
           <td>{{paciente.integrantes}}</td>
           <td>{{paciente.ciudad}}</td>
+          <td>{{paciente.geolocalizacion}}</td>
         </tr>
       </tbody>
     </table>

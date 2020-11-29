@@ -7,6 +7,8 @@ export interface Paciente {
   direccion?: string;
   barrio?: string;
   idBarrio?: string;
+  latitud?: String;
+  longitud?: String;
   geolocalizacion?: String;
   tipoID?: string;
   idTipoID?: string;
