@@ -14,6 +14,7 @@ import profesionalSaludRoutes from './routes/ProfesionalSaludRoutes';
 import pacienteRoutes from './routes/PacienteRoutes';
 import visitaRoutes from './routes/VisitaRoutes';
 import estadiasticasRouter from './routes/EstadiasticasRouter';
+import ubicacionPacienteRoutes from './routes/UbicacionPacienteRoutes';
 
 class Server {
     
@@ -47,6 +48,7 @@ class Server {
         this.app.use('/pacientes', pacienteRoutes);
         this.app.use('/visita', visitaRoutes);
         this.app.use('/estadisticas', estadiasticasRouter);
+        this.app.use('/ubicacion-pacientes', ubicacionPacienteRoutes);
     }
     
     start(): void {

@@ -12,9 +12,9 @@ class VisitaRoutes {
     }
     config() {
         this.router.get('/', VisitaController_1.default.getVisitas);
-        this.router.get('/pacientes', VisitaController_1.default.getVisitaPacientes);
-        this.router.post('/', VisitaController_1.default.setVisita);
-        this.router.put('/', VisitaController_1.default.updateVisita);
+        this.router.get('/:id', VisitaController_1.default.getOne);
+        this.router.post('/', VisitaController_1.default.postVisita);
+        this.router.put('/', VisitaController_1.default.putVisita);
         this.router.post('/delete', VisitaController_1.default.deleteVisita);
     }
 }

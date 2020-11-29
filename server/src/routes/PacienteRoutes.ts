@@ -12,9 +12,10 @@ class MiembroSecretariaSaludRoutes {
     
     config() {
         this.router.get('/', pacienteController.getPacientes);
-        this.router.post('/', pacienteController.setPacientes);
-        this.router.put('/', pacienteController.updatePacientes);
-        this.router.delete('/:id', pacienteController.deletePaciente);
+        this.router.get('/:id', pacienteController.getOne);
+        this.router.post('/', pacienteController.postPacientes);
+        this.router.put('/', pacienteController.putPacientes);
+        this.router.post('/delete', pacienteController.deletePaciente);
     }
 }
 

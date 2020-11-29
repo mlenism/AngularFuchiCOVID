@@ -12,6 +12,10 @@ class LaboratorioRoutes {
     }
     config() {
         this.router.get('/', LaboratorioController_1.default.getLaboratorios);
+        this.router.get('/:id', LaboratorioController_1.default.getOne);
+        this.router.post('/', LaboratorioController_1.default.postLaboratio);
+        this.router.put('/', LaboratorioController_1.default.putLaboratorio);
+        this.router.post('/delete', LaboratorioController_1.default.deleteLaboratorio);
     }
 }
 const laboratorioRoutes = new LaboratorioRoutes();
