@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
+import { UbicacionPacienteService } from 'src/app/services/ubicacion_paciente.service';
 
 @Component({
   selector: 'app-mapa',
@@ -8,9 +9,18 @@ import { Router } from '@angular/router'
 })
 export class MapaComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  lat: number=51;
+  lng: number=8;
+  ubicaciones: any[];
+
+  constructor(private router: Router, private ubicacionPacienteService:UbicacionPacienteService) { 
+
+  }
 
   ngOnInit(): void {
+    //this.ubicacionPacienteService.getUbicacionPacientes().then(pacientes=>console.log(pacientes))
+    this.ubicacionPacienteService.getUbicacionPacientes().then(pacientes=>this.ubicaciones=pacientes)
+    .catch(error=> console.log(error));
   }
 
   volver(event: Event) {

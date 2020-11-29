@@ -13,10 +13,9 @@ class ProfesionalSaludRoutes {
     config() {
         this.router.get('/', ProfesionalSaludController_1.default.getProfesionales);
         this.router.get('/full', ProfesionalSaludController_1.default.getProfesionalesFullName);
-        this.router.get('/:id', ProfesionalSaludController_1.default.getOne);
-        this.router.post('/', ProfesionalSaludController_1.default.postProfesional);
-        this.router.put('/', ProfesionalSaludController_1.default.putProfesional);
-        this.router.post('/delete', ProfesionalSaludController_1.default.deleteProfesional);
+        this.router.post('/', ProfesionalSaludController_1.default.setProfesional);
+        this.router.put('/', ProfesionalSaludController_1.default.updateProfesional);
+        this.router.delete('/:id', ProfesionalSaludController_1.default.deleteProfesional);
     }
 }
 const profesionalSaludRoutes = new ProfesionalSaludRoutes();

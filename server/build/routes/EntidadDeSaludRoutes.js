@@ -12,10 +12,6 @@ class EntidadDeSaludRoutes {
     }
     config() {
         this.router.get('/', EntidadDeSaludController_1.default.getEntidadesDeSalud);
-        this.router.get('/:id', EntidadDeSaludController_1.default.getOne);
-        this.router.put('/', EntidadDeSaludController_1.default.putEntidad);
-        this.router.post('/', EntidadDeSaludController_1.default.postEntidad);
-        this.router.post('/delete', EntidadDeSaludController_1.default.postEntidad);
     }
 }
 const entidadDeSaludRoutes = new EntidadDeSaludRoutes();

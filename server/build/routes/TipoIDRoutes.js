@@ -12,10 +12,6 @@ class TipoIDRoutes {
     }
     config() {
         this.router.get('/', TipoIDController_1.default.getTipoIDs);
-        this.router.get('/:id', TipoIDController_1.default.getOne);
-        this.router.post('/', TipoIDController_1.default.postTipoID);
-        this.router.put('/', TipoIDController_1.default.putTipoID);
-        this.router.post('/delete', TipoIDController_1.default.deleteTipoID);
     }
 }
 const tipoIDRoutes = new TipoIDRoutes();

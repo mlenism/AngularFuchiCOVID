@@ -8,6 +8,8 @@ import { StockService } from '../../services/stock.service';
 
 import { IdNombre } from '../../models/id-nombre';
 import { Visita } from '../../models/visita';
+import { ClassGetter } from '@angular/compiler/src/output/output_ast';
+import { MedicoComponent } from '../medico/medico.component';
 
 @Component({
   selector: 'app-reg-visita',
@@ -40,8 +42,11 @@ export class RegVisitaComponent implements OnInit {
   ngOnInit(): void {}
 
   private getVisitas() {
+    const medico={
+      medico: this.form.controls.doctor.value
+    }
     this.visitaList = [];
-    this.visitaService.getVisita().subscribe(
+    this.visitaService.getVisita(medico).subscribe(
       res => this.visitaList = res as Visita[],
       err => console.error(err)
     )

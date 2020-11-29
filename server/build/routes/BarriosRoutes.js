@@ -12,10 +12,6 @@ class BarriosRoutes {
     }
     config() {
         this.router.get('/', BarriosController_1.default.getBarrios);
-        this.router.get('/:id', BarriosController_1.default.getOne);
-        this.router.put('/', BarriosController_1.default.putBarrio);
-        this.router.post('/', BarriosController_1.default.postBarrio);
-        this.router.post('/delete', BarriosController_1.default.deleteBarrio);
     }
 }
 const barriosRoutes = new BarriosRoutes();

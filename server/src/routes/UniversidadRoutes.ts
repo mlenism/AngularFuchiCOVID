@@ -12,10 +12,6 @@ class UniversidadRoutes {
     
     config() {
         this.router.get('/', universidadController.getUniversidades);
-        this.router.get('/:id', universidadController.getOne);
-        this.router.post('/', universidadController.postUniversidad);
-        this.router.put('/', universidadController.putUniversidad);
-        this.router.post('/delete', universidadController.deleteUniversidad);
     }
 }
 

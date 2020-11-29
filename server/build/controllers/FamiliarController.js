@@ -1,38 +1,31 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const database_1 = require("../database");
 class FamiliarController {
     async getFamiliares(req, res) {
         try {
-            const familiares = await database_1.pool.query('SELECT * FROM familiar ORDER BY id ASC');
-            return res.status(200).json(familiares.rows);
+            // const familiares: QueryResult = await pool.query('SELECT * FROM familiar ORDER BY id ASC');
+            // return res.status(200).json(familiares.rows);
+            const listaDePrueba = [
+                {
+                    id: '1044111111',
+                    nombre: 'nombre_familiar1',
+                    apellido: 'apellido_familiar1',
+                    email: 'correo1@gmail.com',
+                    telefono: '3151111111',
+                    parentesco: 'hermano',
+                    tipoID: 'cedula de ciudadanía',
+                    idTipoID: '1'
+                }
+            ];
+            return res.status(200).json(listaDePrueba);
         }
         catch (e) {
             console.log(e);
             return res.status(500).json('Internal server error');
         }
     }
-    async getOne(req, res) {
+    async setFamiliar(req, res) {
         try {
-            const { id } = req.params;
-            const familiar = await database_1.pool.query('SELECT * FROM familiar WHERE id = $1', [id]);
-            if (familiar.rows.length > 0) {
-                return res.status(200).json(familiar.rows);
-            }
-            else {
-                return res.send('Familiar no encontrado');
-            }
-        }
-        catch (e) {
-            console.log(e);
-            return res.status(500).json('Internal server error');
-        }
-    }
-    async postFamiliar(req, res) {
-        try {
-            const { id, nombre, apellido, id_tipoID, email, telefono } = req.body;
-            await database_1.pool.query('INSERT INTO familiar {id, nombre, apelido, id_tipoID, email, telefono} VALUES {$1, $2, $3, $4, $5, $6}'),
-                [id, nombre, apellido, id_tipoID, email, telefono];
             console.log(req.body);
             return res.status(200).send('INSERTADO');
         }
@@ -41,11 +34,8 @@ class FamiliarController {
             return res.status(500).json('Internal server error');
         }
     }
-    async putFamiliar(req, res) {
+    async updateFamiliar(req, res) {
         try {
-            const { id, nombre, apellido, id_tipoID, email, telefono } = req.body;
-            await database_1.pool.query('UPDATE familiar SET nombre = $1, apellido = $2, id_tipoID = $3, email = $4, telefono = $5 WHERE id = $6'),
-                [nombre, apellido, id_tipoID, email, telefono, id];
             console.log(req.body);
             return res.status(200).send('ACTUALIZADO');
         }
@@ -56,8 +46,7 @@ class FamiliarController {
     }
     async deleteFamiliar(req, res) {
         try {
-            const { id } = req.body;
-            await database_1.pool.query('DELETE FROM familiar WHERE id = $1', [id]);
+            const { id_paciente, id_familiar } = req.body;
             console.log(req.body);
             return res.status(200).send('BORRADO');
         }

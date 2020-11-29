@@ -14,8 +14,8 @@ export class VisitaService {
 
   constructor(private http: HttpClient) { }
 
-  getVisita(): Observable<Visita> {
-    return this.http.get(this.API_URI);
+  getVisita(medico: any): Observable<Visita> {
+    return this.http.post(`${this.API_URI}/visita-medico`, medico);
   }
 
   getVisitaPacientes(): Observable<IdNombre> {

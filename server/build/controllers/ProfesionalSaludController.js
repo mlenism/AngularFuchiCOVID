@@ -14,35 +14,51 @@ class ProfesionalSaludController {
     }
     async getProfesionales(req, res) {
         try {
-            const profesionales = await database_1.pool.query('SELECT * FROM profesional_salud ORDER BY (id) ASC');
-            return res.status(200).json(profesionales.rows);
+            // const profesionales: QueryResult = await pool.query('SELECT * FROM profesional_salud ORDER BY (id) ASC');
+            // return res.status(200).json(profesionales.rows);
+            const listaDePrueba = [
+                {
+                    id: "1244111111",
+                    nombre: "nombre_profesional1",
+                    apellido: "apellido_profesiona1",
+                    contrasenia: "password1",
+                    direccion: "Cra 1b #50-61",
+                    barrio: "Terrón Colorado",
+                    idBarrio: "1",
+                    tipoID: "cedula de ciudadanía",
+                    idTipoID: "1",
+                    universidad: "Universidad Nacional de Colombia",
+                    idUniversidad: "1",
+                    entidad: "EPS Sura",
+                    idEntidad: "1"
+                },
+                {
+                    id: "1244222222",
+                    nombre: "nombre_profesional2",
+                    apellido: "apellido_profesiona2",
+                    contrasenia: "password2",
+                    direccion: "Cra 1b #50-61",
+                    barrio: "Vista Hermosa",
+                    idBarrio: "2",
+                    tipoID: "cedula extranjera",
+                    idTipoID: "2",
+                    universidad: "Universidad de Antioquia",
+                    idUniversidad: "2",
+                    entidad: "Comfenalco valle",
+                    idEntidad: "2"
+                }
+            ];
+            return res.status(200).json(listaDePrueba);
         }
         catch (e) {
             console.log(e);
             return res.status(500).json('Internal server error');
         }
     }
-    async getOne(req, res) {
+    async setProfesional(req, res) {
         try {
-            const { id } = req.params;
-            const profesional = await database_1.pool.query('SELECT * FROM profesional_salud WHERE id = $1', [id]);
-            if (profesional.rows.length > 0) {
-                return res.status(200).json(profesional.rows);
-            }
-            else {
-                return res.send('Profesional no encontrado');
-            }
-        }
-        catch (e) {
-            console.log(e);
-            return res.status(500).json('Internal server error');
-        }
-    }
-    async postProfesional(req, res) {
-        try {
-            const { id, nombre, apellido, id_tipoID, id_universidad, id_entidad, contrasenia } = req.body;
-            await database_1.pool.query('INSERT INTO profesional_salud {id, nombre, apellido, id_tipoID, id_universidad, id_entidad, contrasenia} VALUES {$1, $2, $3, $4, $5, $6, $7}'),
-                [id, nombre, apellido, id_tipoID, id_universidad, id_entidad, contrasenia];
+            // const { nombre, apellido, ... } = req.body;
+            // await pool.query('INSERT INTO profesional_salud (nombre, apellido, ...) VALUES ($1, $2, $...)', [nombre, apellido, ...]);
             console.log(req.body);
             return res.status(200).send('INSERTADO');
         }
@@ -51,11 +67,11 @@ class ProfesionalSaludController {
             return res.status(500).json('Internal server error');
         }
     }
-    async putProfesional(req, res) {
+    async updateProfesional(req, res) {
         try {
-            const { id, nombre, apellido, id_tipoID, id_universidad, id_entidad, contrasenia } = req.body;
-            await database_1.pool.query('UPDATE profesional_salud SET nombre = $1, apellido = $2, id_tipoid = $3, id_universidad = $4, id_entidad = $5, contrasenia = $6 WHERE id = $7'),
-                [nombre, apellido, id_tipoID, id_universidad, id_entidad, contrasenia, id];
+            const { id, nombre, apellido, contrasenia, direccion, barrio, tipoID, universidad, entidad } = req.body;
+            await database_1.pool.query('UPDATE profesional_salud SET nombre = $1, apellido = $2, id_tipoid = $3, id_universidad = $4, id_entidad = $5, contrasenia = $6 WHERE id = $7', [nombre, apellido, tipoID, universidad, entidad, contrasenia, id]);
+            await database_1.pool.query('UPDATE ubicacion_profesional_salud SET id_barrio = $1, direccion = $2 WHERE id_profesional_salud = $3', [barrio, direccion, id]);
             return res.status(200).send('ACTUALIZADO');
         }
         catch (e) {
@@ -65,7 +81,7 @@ class ProfesionalSaludController {
     }
     async deleteProfesional(req, res) {
         try {
-            const { id } = req.body;
+            const { id } = req.params;
             await database_1.pool.query('DELETE FROM profesional_salud WHERE id = $1', [id]);
             return res.status(200).send('BORRADO');
         }

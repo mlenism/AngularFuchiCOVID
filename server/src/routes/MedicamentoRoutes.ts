@@ -12,10 +12,6 @@ class MedicamentoRoutes {
     
     config() {
         this.router.get('/', medicamentoController.getMedicamentos);
-        this.router.get('/:id', medicamentoController.getOne);
-        this.router.post('/', medicamentoController.postMedicamento);
-        this.router.put('/', medicamentoController.putMedicamento);
-        this.router.post('/delete', medicamentoController.deleteMedicamento);
     }
 }
 

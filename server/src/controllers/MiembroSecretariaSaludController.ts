@@ -33,59 +33,6 @@ class MiembroSecretariaSaludController {
             return res.status(500).json('Internal server error');
         }
     }
-
-    public async getOne(req: Request, res: Response): Promise<Response> {
-        try{
-            const { id } = req.params;
-            const secretaria_salud: QueryResult = await pool.query('SELECT * FROM miembro_secretaria_salud WHERE id = $1', [id])
-            if(secretaria_salud.rows.length > 0){
-                return res.status(200).json(secretaria_salud.rows)
-            }else{
-                return res.send('Miembro de la secretaria de salud no encontrado')
-            }
-        } catch (e) {
-            console.log(e);
-            return res.status(500).json('Internal server error');
-        }
-    }
-
-    public async postMiembroSalud(req: Request, res: Response): Promise<Response> {
-        try {
-            const { id, nombre, apellido, contrasenia } = req.body;
-            await pool.query('INSERT INTO miembro_secretaria_salud {id, nombre, apellido, contrasenia} VALUES {$1, $2, $3, $4}'),
-                [id, nombre, apellido, contrasenia];
-            console.log(req.body);
-            return res.status(200).send('INSERTADO');
-        } catch (e) {
-            console.log(e);
-            return res.status(500).json('Internal server error');
-        }        
-    }
-
-    public async putMiembroSalud(req: Request, res: Response): Promise<Response> {
-        try {
-            const { id, nombre, apellido, contrasenia } = req.body;
-            await pool.query('UPDATE miembro_secretaria_salud SET nombre = $1, apellido = $2 contrasenia $3 WHERE id = $4'),
-                [nombre, apellido, contrasenia, id];
-            console.log(req.body);
-            return res.status(200).send('ACTUALIZADO');
-        } catch (e) {
-            console.log(e);
-            return res.status(500).json('Internal server error');
-        }        
-    }
-
-    public async deleteMiembroSalud(req: Request, res: Response): Promise<Response> {
-        try {
-            const { id } = req.body;
-            await pool.query('DELETE FROM miembro_secretaria_salud WHERE id = $1', [id])
-            console.log(req.body);
-            return res.status(200).send('BORRADO');
-        } catch (e) {
-            console.log(e);
-            return res.status(500).json('Internal server error');
-        }
-    }
 }
 
 const miembroSecretariaSaludController = new MiembroSecretariaSaludController();
