@@ -5,8 +5,6 @@ class VisitaController {
     async getVisitas(req, res) {
         try {
             const { medico } = req.body;
-            // const visitas: QueryResult = await pool.query('SELECT * FROM visita ORDER BY (id) ASC');
-            // return res.status(200).json(visitas.rows);
             const visitas = await database_1.pool.query('select vis.id,'
                 + 'id_profesional_salud as "idProfesional", '
                 + 'id_paciente as "idpaciente",'
@@ -47,8 +45,10 @@ class VisitaController {
     async setVisita(req, res) {
         try {
             const { doctor, paciente, temperatura, peso, presion, laboratorio, medicamento, dosis, observaciones } = req.body;
-            await database_1.pool.query('insert into visita (id_paciente, id_profesional_salud,temperatura,peso,presion_arterial,observaciones) VALUES ($1, $2, $3, $4, $5, $6)', [paciente, doctor, temperatura, peso, presion, observaciones]);
-            await database_1.pool.query('insert into visita_dosis_diaria (id_laboratorio,id_medicamento,dosis_diaria) VALUES ($1, $2, $3)', [laboratorio, medicamento, dosis]);
+            await database_1.pool.query('INSERT INTO visita (id_paciente, id_profesional_salud, temperatura, peso, presion_arterial, observaciones) '
+                + 'VALUES ($1, $2, $3, $4, $5, $6, $7)', [paciente, doctor, temperatura, peso, presion, observaciones]);
+            await database_1.pool.query('INSERT INTO visita_paciente (id_visita, id_laboratorio, id_medicamento, dosis_diaria) '
+                + 'VALUES ($1,$2,$3,$4)', []);
             console.log(req.body);
             return res.status(200).send('INSERTADO');
         }
@@ -59,6 +59,13 @@ class VisitaController {
     }
     async updateVisita(req, res) {
         try {
+            //RECUERDEN IMPLEMENTAR EL ID DE LA VISITA PARA ACTUALIZAR POR VISITA
+            //TAMBIEN RECORDAR QUE EL id_visita DE LA TABLA visita_dosis_diaria ES UNA
+            //FK, POR TANTO DEBEMOS RECIBIRLA Y NO CREARLA
+            const { id, doctor, paciente, temperatura, peso, presion, laboratorio, medicamento, dosis, observaciones } = req.body;
+            await database_1.pool.query('UPDATE visita SET temperatura=$1, peso=$2, presion_arterial=$3, observaciones=$4 '
+                + 'WHERE id_visita = $5', [paciente, doctor, temperatura, peso, presion, observaciones, id]);
+            await database_1.pool.query('UPDATE visita_paciente SET dosis_diaria=$1, WHERE id_visita=$2', [id]);
             console.log(req.body);
             return res.status(200).send('ACTUALIZADO');
         }
@@ -69,7 +76,9 @@ class VisitaController {
     }
     async deleteVisita(req, res) {
         try {
-            const { id_paciente, id_doctor } = req.body;
+            const { id, id_paciente, id_doctor } = req.body;
+            await database_1.pool.query('DELETE FROM visita WHERE id=$1', [id]);
+            await database_1.pool.query('DELETE FROM visita_dosis_diaria WHERE id_paciente=$1 and id_doctor=$2', [id_paciente, id_doctor]);
             console.log(req.body);
             return res.status(200).send('BORRADO');
         }

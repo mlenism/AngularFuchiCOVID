@@ -35,8 +35,9 @@ export class RegPersonaRelacionadaComponent implements OnInit {
   ngOnInit(): void {}
 
   private getFamiliares() {
+    const pac = { id_paciente: JSON.parse(localStorage.getItem("paciente")).id }
     this.familiarList = [];
-    this.familiarService.getPersonaRelacionada().subscribe(
+    this.familiarService.getPersonaRelacionada(pac).subscribe(
       res => this.familiarList = res as PersonaRelacionada[],
       err => console.error(err)
     )
@@ -53,7 +54,8 @@ export class RegPersonaRelacionadaComponent implements OnInit {
   private buildForm() {
     this.form = this.FormBuilder.group(
       {
-        id: ['', [Validators.required]],
+        id_paciente: JSON.parse(localStorage.getItem("paciente")).id,
+        id: ['', [Validators.required]],        
         nombre: ['', [Validators.required]],
         apellido: ['', [Validators.required]],
         email: ['', [Validators.required]],
