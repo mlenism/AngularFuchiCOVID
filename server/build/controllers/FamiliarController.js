@@ -26,7 +26,7 @@ class FamiliarController {
         try {
             const { id_paciente, id, nombre, apellido, email, telefono, parentesco, tipoID } = req.body;
             await database_1.pool.query('INSERT INTO familiar (id, nombre, apellido, id_tipoid, email, telefono) '
-                + 'VALUES ($1, $2, $3, $4, $5)', [id, nombre, apellido, tipoID, email, telefono]);
+                + 'VALUES ($1, $2, $3, $4, $5, $6)', [id, nombre, apellido, tipoID, email, telefono]);
             await database_1.pool.query('INSERT INTO paciente_familiar (id_paciente, id_familiar, parentesco) VALUES ($1, $2, $3)', [id_paciente, id, parentesco]);
             return res.status(200).send('INSERTADO');
         }
@@ -38,8 +38,8 @@ class FamiliarController {
     async updateFamiliar(req, res) {
         try {
             const { id_paciente, id, nombre, apellido, email, telefono, parentesco, tipoID } = req.body;
-            await database_1.pool.query('UPDATE familiar nombre=$1, apellido=$2, id_tipoid=$3, email=$4,telefono=$5 WHERE id=$6', [nombre, apellido, tipoID, email, telefono, id]);
-            await database_1.pool.query('UPDATE paciente_familiar parentesco=$1 WHERE id_paciente=$2 and id_familiar=$3', [parentesco, id_paciente, id]);
+            await database_1.pool.query('UPDATE familiar SET nombre=$1, apellido=$2, id_tipoid=$3, email=$4,telefono=$5 WHERE id=$6', [nombre, apellido, tipoID, email, telefono, id]);
+            await database_1.pool.query('UPDATE paciente_familiar SET parentesco=$1 WHERE id_paciente=$2 and id_familiar=$3', [parentesco, id_paciente, id]);
             return res.status(200).send('ACTUALIZADO');
         }
         catch (e) {

@@ -43,12 +43,12 @@ class ProfesionalSaludController {
     async setProfesional(req, res) {
         try {
             const { id_miembro_secretaria, id, nombre, apellido, contrasenia, direccion, barrio, tipoID, universidad, entidad } = req.body;
-            await database_1.pool.query('INSERT INTO profesional_salud (id, nombre, apellido, id_tipoid, id_universidad, id_entidad, contrasenia '
+            await database_1.pool.query('INSERT INTO profesional_salud (id, nombre, apellido, id_tipoid, id_universidad, id_entidad, contrasenia) '
                 + 'VALUES ($1,$2,$3,$4,$5,$6,$7)', [id, nombre, apellido, tipoID, universidad, entidad, contrasenia]);
-            await database_1.pool.query('INSERT INTO registro_profesional_salud (id_miembro_secretaria_salud, id_profesional_salud '
+            await database_1.pool.query('INSERT INTO registro_profesional_salud (id_miembro_secretaria_salud, id_profesional_salud) '
                 + 'VALUES ($1, $2)', [id_miembro_secretaria, id]);
             await database_1.pool.query('INSERT INTO ubicacion_profesional_salud (id_profesional_salud, id_barrio, direccion) '
-                + 'VALUES ($1, $2)', [id, barrio, direccion]);
+                + 'VALUES ($1, $2, $3)', [id, barrio, direccion]);
             console.log(req.body);
             return res.status(200).send('INSERTADO');
         }
