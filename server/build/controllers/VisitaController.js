@@ -62,10 +62,10 @@ class VisitaController {
             //RECUERDEN IMPLEMENTAR EL ID DE LA VISITA PARA ACTUALIZAR POR VISITA
             //TAMBIEN RECORDAR QUE EL id_visita DE LA TABLA visita_dosis_diaria ES UNA
             //FK, POR TANTO DEBEMOS RECIBIRLA Y NO CREARLA
-            const { id, doctor, paciente, temperatura, peso, presion, laboratorio, medicamento, dosis, observaciones } = req.body;
-            await database_1.pool.query('UPDATE visita SET temperatura=$1, peso=$2, presion_arterial=$3, observaciones=$4 '
-                + 'WHERE id_visita = $5', [paciente, doctor, temperatura, peso, presion, observaciones, id]);
-            await database_1.pool.query('UPDATE visita_paciente SET dosis_diaria=$1, WHERE id_visita=$2', [id]);
+            // const {id, doctor, paciente, temperatura, peso, presion, laboratorio, medicamento, dosis, observaciones} = req.body;
+            // await pool.query('UPDATE visita SET temperatura=$1, peso=$2, presion_arterial=$3, observaciones=$4 '
+            //     + 'WHERE id_visita = $5', [paciente, doctor, temperatura, peso, presion, observaciones, id]);
+            // await pool.query('UPDATE visita_paciente SET dosis_diaria=$1, WHERE id_visita=$2', [id])
             console.log(req.body);
             return res.status(200).send('ACTUALIZADO');
         }

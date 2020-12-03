@@ -16,16 +16,4 @@ export class UbicacionPacienteService {
   getUbicacionPacientes(): Promise<any[]> {
     return this.http.get<any[]>(this.API_URI).toPromise();
   }
-
-  setUbicacionPaciente(ubicacion_paciente: any): Observable<any> {
-    return this.http.post(this.API_URI, ubicacion_paciente, {responseType: 'text'});
-  }
-
-  updateUbicacionPaciente(ubicacion_paciente: any): Observable<any> {
-    return this.http.put(this.API_URI, ubicacion_paciente, {responseType: 'text'});
-  }
-
-  deleteUbicacionPaciente(id: string): Observable<any> {
-    return this.http.delete(`${this.API_URI}/${id}`, {responseType: 'text'});
-  }
 }

@@ -18,6 +18,7 @@ const ProfesionalSaludRoutes_1 = __importDefault(require("./routes/ProfesionalSa
 const PacienteRoutes_1 = __importDefault(require("./routes/PacienteRoutes"));
 const VisitaRoutes_1 = __importDefault(require("./routes/VisitaRoutes"));
 const EstadiasticasRouter_1 = __importDefault(require("./routes/EstadiasticasRouter"));
+const UbicacionPacienteRoutes_1 = __importDefault(require("./routes/UbicacionPacienteRoutes"));
 class Server {
     constructor() {
         this.app = express_1.default();
@@ -44,6 +45,7 @@ class Server {
         this.app.use('/pacientes', PacienteRoutes_1.default);
         this.app.use('/visita', VisitaRoutes_1.default);
         this.app.use('/estadisticas', EstadiasticasRouter_1.default);
+        this.app.use('/ubicacion-pacientes', UbicacionPacienteRoutes_1.default);
     }
     start() {
         this.app.listen(3000, () => {

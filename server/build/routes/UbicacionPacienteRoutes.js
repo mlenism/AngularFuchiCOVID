@@ -12,9 +12,6 @@ class UbicacionPacienteRoutes {
     }
     config() {
         this.router.get('/', UbicacionPacienteController_1.default.getUbicacion);
-        this.router.get('/:id', UbicacionPacienteController_1.default.getOne);
-        this.router.post('/', UbicacionPacienteController_1.default.postUbicacion);
-        this.router.put('/', UbicacionPacienteController_1.default.putUbicacion);
     }
 }
 const ubicacionPacienteRoutes = new UbicacionPacienteRoutes();
