@@ -14,41 +14,26 @@ class ProfesionalSaludController {
     }
     async getProfesionales(req, res) {
         try {
-            // const profesionales: QueryResult = await pool.query('SELECT * FROM profesional_salud ORDER BY (id) ASC');
-            // return res.status(200).json(profesionales.rows);
-            const listaDePrueba = [
-                {
-                    id: "1244111111",
-                    nombre: "nombre_profesional1",
-                    apellido: "apellido_profesiona1",
-                    contrasenia: "password1",
-                    direccion: "Cra 1b #50-61",
-                    barrio: "Terrón Colorado",
-                    idBarrio: "1",
-                    tipoID: "cedula de ciudadanía",
-                    idTipoID: "1",
-                    universidad: "Universidad Nacional de Colombia",
-                    idUniversidad: "1",
-                    entidad: "EPS Sura",
-                    idEntidad: "1"
-                },
-                {
-                    id: "1244222222",
-                    nombre: "nombre_profesional2",
-                    apellido: "apellido_profesiona2",
-                    contrasenia: "password2",
-                    direccion: "Cra 1b #50-61",
-                    barrio: "Vista Hermosa",
-                    idBarrio: "2",
-                    tipoID: "cedula extranjera",
-                    idTipoID: "2",
-                    universidad: "Universidad de Antioquia",
-                    idUniversidad: "2",
-                    entidad: "Comfenalco valle",
-                    idEntidad: "2"
-                }
-            ];
-            return res.status(200).json(listaDePrueba);
+            const profesionales = await database_1.pool.query('SELECT prof.id,'
+                + 'prof.nombre,'
+                + 'prof.apellido,'
+                + 'prof.contrasenia,'
+                + 'ubic.direccion,'
+                + 'barr.nombre as barrio,'
+                + 'barr.id as "idBarrio",'
+                + 'tipo.nombre as "tipoID",'
+                + 'prof.id_tipoid as "idTipoID",'
+                + 'uni.nombre as universidad,'
+                + 'prof.id_universidad as "idUniversidad",'
+                + 'ent.nombre as entidad,'
+                + 'prof.id_entidad as "idEntidad" '
+                + 'from profesional_salud as prof '
+                + 'join ubicacion_profesional_salud as ubic on prof.id=ubic.id_profesional_salud '
+                + 'join barrio as barr on barr.id=ubic.id_barrio '
+                + 'join tipoid as tipo on tipo.id=prof.id_tipoid '
+                + 'join universidad as uni on uni.id=prof.id_universidad '
+                + 'join entidad_de_salud as ent on ent.id=prof.id_entidad');
+            return res.status(200).json(profesionales.rows);
         }
         catch (e) {
             console.log(e);
@@ -57,8 +42,13 @@ class ProfesionalSaludController {
     }
     async setProfesional(req, res) {
         try {
-            // const { nombre, apellido, ... } = req.body;
-            // await pool.query('INSERT INTO profesional_salud (nombre, apellido, ...) VALUES ($1, $2, $...)', [nombre, apellido, ...]);
+            const { id_miembro_secretaria, id, nombre, apellido, contrasenia, direccion, barrio, tipoID, universidad, entidad } = req.body;
+            await database_1.pool.query('INSERT INTO profesional_salud (id, nombre, apellido, id_tipoid, id_universidad, id_entidad, contrasenia) '
+                + 'VALUES ($1,$2,$3,$4,$5,$6,$7)', [id, nombre, apellido, tipoID, universidad, entidad, contrasenia]);
+            await database_1.pool.query('INSERT INTO registro_profesional_salud (id_miembro_secretaria_salud, id_profesional_salud) '
+                + 'VALUES ($1, $2)', [id_miembro_secretaria, id]);
+            await database_1.pool.query('INSERT INTO ubicacion_profesional_salud (id_profesional_salud, id_barrio, direccion) '
+                + 'VALUES ($1, $2, $3)', [id, barrio, direccion]);
             console.log(req.body);
             return res.status(200).send('INSERTADO');
         }

@@ -11,7 +11,7 @@ class FamiliarRoutes {
         this.config();
     }
     config() {
-        this.router.get('/', FamiliarController_1.default.getFamiliares);
+        this.router.post('/get', FamiliarController_1.default.getFamiliares);
         this.router.post('/', FamiliarController_1.default.setFamiliar);
         this.router.put('/', FamiliarController_1.default.updateFamiliar);
         this.router.post('/delete', FamiliarController_1.default.deleteFamiliar);

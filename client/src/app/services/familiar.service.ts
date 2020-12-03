@@ -13,8 +13,8 @@ export class FamiliarService {
 
   constructor(private http: HttpClient) { }
 
-  getPersonaRelacionada(): Observable<PersonaRelacionada> {
-    return this.http.get(this.API_URI);
+  getPersonaRelacionada(paciente: any): Observable<PersonaRelacionada> {
+    return this.http.post(`${this.API_URI}/get`, paciente);
   }
 
   setPersonaRelacionada(personaRelacionada: any): Observable<any> {
