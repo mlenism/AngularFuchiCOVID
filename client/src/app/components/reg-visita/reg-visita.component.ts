@@ -18,6 +18,7 @@ import { MedicoComponent } from '../medico/medico.component';
 })
 export class RegVisitaComponent implements OnInit {
 
+  idvisita: number = 0;
   form: FormGroup;
   visitaList: Visita[];
   pacienteList: IdNombre[];
@@ -90,6 +91,7 @@ export class RegVisitaComponent implements OnInit {
   private buildForm() {
     this.form = this.FormBuilder.group(
       {
+        id: this.idvisita,
         doctor: JSON.parse(localStorage.getItem("miembro")).id,
         paciente: ['', [Validators.required]],
         temperatura: ['', [Validators.required]],
@@ -129,10 +131,7 @@ export class RegVisitaComponent implements OnInit {
 
   borrar(event: Event) {
     event.preventDefault();
-    const value =  {
-      id_paciente: this.form.value.paciente,
-      id_doctor: JSON.parse(localStorage.getItem('miembro')).id
-    } 
+    const value = this.form.value;
     this.visitaService.deleteVisita(value).subscribe(
       res => {
         this.getVisitas();
@@ -152,6 +151,7 @@ export class RegVisitaComponent implements OnInit {
     control.medicamento.setValue(visita.idMedicamento);
     control.dosis.setValue(visita.dosisDiaria);
     control.observaciones.setValue(visita.observaciones);
+    control.id.setValue(visita.id);
     this.getStock(visita.idlaboratorio, visita.idMedicamento);
   }
 
