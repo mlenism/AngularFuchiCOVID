@@ -95,8 +95,11 @@ export class RegPacienteComponent {
     const value = this.form.value;
     this.pacienteService.setPaciente(value).subscribe(
       res => {
-        this.getPacientes();
-        console.log(res);
+        if (res == 'CONSTRAINT "paciente_pkey"') {
+          window.alert('La acción no se puede ejecutar debido a que ya existe un paciente con la misma cedula');
+        } else {
+          this.getPacientes();
+        }
       },
       err => console.error(err)
     )

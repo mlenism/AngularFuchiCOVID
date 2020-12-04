@@ -10,37 +10,41 @@
     <table>
       <tr>
         <td>
-          <input type="text" formControlName="id">
+          <input type="text" placeholder="identificacion" formControlName="id">
         </td>
         <td>
-          <input type="text" formControlName="nombre">
+          <input type="text" placeholder="nombre" formControlName="nombre">
         </td>
         <td>
-          <input type="text" formControlName="apellido">
+          <input type="text" placeholder="apellido" formControlName="apellido">
         </td>
         <td>
-          <input type="text" formControlName="contrasenia">
+          <input type="text" placeholder="contraseña" formControlName="contrasenia">
         </td>
         <td>
-          <input type="text" formControlName="direccion">
+          <input type="text" placeholder="dirección" formControlName="direccion">
         </td>
         <td>
           <select formControlName="barrio">
+            <option value="" selected disabled hidden>barrio</option>
             <option *ngFor="let barrio of barrioList" value={{barrio.id}}>{{barrio.nombre}}</option>
           </select>
         </td>
         <td>
           <select formControlName="tipoID">
+            <option value="" selected disabled hidden>tipo de id</option>
             <option *ngFor="let tipoid of tipoIDlist" value={{tipoid.id}}>{{tipoid.nombre}}</option>
           </select>
         </td>
         <td>
           <select formControlName="universidad">
+            <option value="" selected disabled hidden>universidad</option>
             <option *ngFor="let universidad of universidadList" value="{{universidad.id}}">{{universidad.nombre}}</option>
           </select>
         </td>
         <td>
           <select formControlName="entidad">
+            <option value="" selected disabled hidden>entidad de salud</option>
             <option *ngFor="let entidad of entidadList" value={{entidad.id}}>{{entidad.nombre}}</option>
           </select>
         </td>
@@ -54,7 +58,7 @@
           <th>NOMBRE</th>
           <th>APELLIDO</th>
           <th>CONTRASEÑA</th>
-          <th>DIRECCION</th>
+          <th>DIRECCIÓN</th>
           <th>BARRIO</th>
           <th>TIPO DE ID</th>
           <th>UNIVERSIDAD</th>

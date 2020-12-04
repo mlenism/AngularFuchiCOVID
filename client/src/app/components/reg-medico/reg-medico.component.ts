@@ -104,8 +104,11 @@ export class RegMedicoComponent implements OnInit {
     const value = this.form.value;
     this.medicoService.setMedico(value).subscribe(
       res => {
-        this.getProfesional();
-        console.log(res);
+        if (res == 'CONSTRAINT "profesional_salud_pkey"') {
+          window.alert('La acción no se puede ejecutar debido a que ya existe un profesional de salud con la misma cedula');
+        } else {
+          this.getProfesional();
+        }
       },
       err => console.error(err)
     )
@@ -117,7 +120,6 @@ export class RegMedicoComponent implements OnInit {
     this.medicoService.updateMedico(value).subscribe(
       res => {
         this.getProfesional();
-        console.log(res);
       },
       err => console.error(err)
     )
@@ -132,7 +134,6 @@ export class RegMedicoComponent implements OnInit {
           window.alert('La acción no se puede ejecutar debido a que hay un paciente siendo atendido por este profesional de la salud');
         } else {
           this.getProfesional();
-          console.log('BORRADO');
         }
       },
       err => console.error(err)

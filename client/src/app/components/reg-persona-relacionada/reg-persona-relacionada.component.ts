@@ -71,7 +71,11 @@ export class RegPersonaRelacionadaComponent implements OnInit {
     const value = this.form.value;
     this.familiarService.setPersonaRelacionada(value).subscribe(
       res => {
-        this.getFamiliares();
+        if (res == 'CONSTRAINT "familiar_pkey"') {
+          window.alert('La acción no se puede ejecutar debido a que ya existe alguien con la misma cedula');
+        } else {
+          this.getFamiliares();
+        }
         console.log(res);
       },
       err => console.error(err)

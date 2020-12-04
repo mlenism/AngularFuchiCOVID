@@ -10,25 +10,26 @@
     <table>
       <tr>
         <td>
-          <input type="text" formControlName="id">
+          <input type="text" placeholder="identificación" formControlName="id">
         </td>
         <td>
-          <input type="text" formControlName="nombre">
+          <input type="text" placeholder="nombre" formControlName="nombre">
         </td>
         <td>
-          <input type="text" formControlName="apellido">
+          <input type="text" placeholder="apellido" formControlName="apellido">
         </td>
         <td>
-          <input type="text" formControlName="email">
+          <input type="text" placeholder="email" formControlName="email">
         </td>
         <td>
-          <input type="text" formControlName="telefono">
+          <input type="text" placeholder="telefono" formControlName="telefono">
         </td>
         <td>
-          <input type="text" formControlName="parentesco">
+          <input type="text" placeholder="parentesco" formControlName="parentesco">
         </td>
         <td>
           <select formControlName="tipoID">
+            <option value="" selected disabled hidden>tipo de identificación</option>
             <option *ngFor="let tipoid of tipoIDlist" value={{tipoid.id}}>{{tipoid.nombre}}</option>
           </select>
         </td>

@@ -41,6 +41,10 @@ class PacienteController {
         }
         catch (e) {
             console.log(e);
+            const men = 'duplicate key value violates unique constraint "paciente_pkey"';
+            if (e.message == men) {
+                return res.status(200).send('CONSTRAINT "paciente_pkey"');
+            }
             return res.status(500).json('Internal server error');
         }
     }

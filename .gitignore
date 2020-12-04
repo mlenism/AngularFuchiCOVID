@@ -2,7 +2,6 @@
 
 # compiled output
 server/src/database.ts
-server/build
 client/dist
 client/tmp
 client/out-tsc

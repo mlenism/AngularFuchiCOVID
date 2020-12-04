@@ -54,6 +54,10 @@ class ProfesionalSaludController {
         }
         catch (e) {
             console.log(e);
+            const men = 'duplicate key value violates unique constraint "profesional_salud_pkey"';
+            if (e.message == men) {
+                return res.status(200).send('CONSTRAINT "profesional_salud_pkey"');
+            }
             return res.status(500).json('Internal server error');
         }
     }
@@ -76,7 +80,8 @@ class ProfesionalSaludController {
             return res.status(200).send('BORRADO');
         }
         catch (e) {
-            let men = 'update or delete on table "profesional_salud" violates foreign key constraint "FK_medico" on table "paciente"';
+            console.log(e);
+            const men = 'update or delete on table "profesional_salud" violates foreign key constraint "FK_medico" on table "paciente"';
             if (e.message == men) {
                 return res.status(200).send('CONSTRAINT "FK_medico"');
             }

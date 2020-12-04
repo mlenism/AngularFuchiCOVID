@@ -12,44 +12,47 @@
     <table>
       <tr>
         <td>
-          <input type="text" formControlName="id">
+          <input type="text" placeholder="identificacion" formControlName="id">
         </td>
         <td>
-          <input type="text" formControlName="nombre">
+          <input type="text" placeholder="nombre" formControlName="nombre">
         </td>
         <td>
-          <input type="text" formControlName="apellido">
+          <input type="text" placeholder="apellido" formControlName="apellido">
         </td>
         <td>
-          <input type="text" formControlName="edad">
+          <input type="text" placeholder="edad" formControlName="edad">
         </td>
         <td>
-          <input type="text" formControlName="direccion">
+          <input type="text" placeholder="dirección" formControlName="direccion">
         </td>
         <td>
           <select formControlName="barrio">
+            <option value="" selected disabled hidden>barrio</option>
             <option *ngFor="let barrio of barrioList" value={{barrio.id}}>{{barrio.nombre}}</option>
           </select>
         </td>
         <td>
           <select formControlName="tipoID">
+            <option value="" selected disabled hidden>tipo de id</option>
             <option *ngFor="let tipoid of tipoIDlist" value={{tipoid.id}}>{{tipoid.nombre}}</option>
           </select>
         </td>
         <td>
-          <input type="text" formControlName="integrantes">
+          <input type="text" placeholder="integrantes" formControlName="integrantes">
         </td>
         <td>
-          <input type="text" formControlName="ciudad">
+          <input type="text" placeholder="ciudad" formControlName="ciudad">
         </td>
         <td>
-          <input type="latitud" formControlName="latitud">
+          <input type="latitud" placeholder="latitud" formControlName="latitud">
         </td>
         <td>
-          <input type="longitud" formControlName="longitud">
+          <input type="longitud" placeholder="longitud" formControlName="longitud">
         </td>
         <td>
           <select formControlName="medico">
+            <option value="" selected disabled hidden>medico</option>
             <option *ngFor="let medico of medicoList" value={{medico.id}}>{{medico.nombre}}</option>
           </select>
         </td>
