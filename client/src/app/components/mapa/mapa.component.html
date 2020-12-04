@@ -1,8 +1,9 @@
 <div class="content">
-  <p>mapa works!</p>
-  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+  <div>
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
     <agm-marker *ngFor="let ubicacion of ubicaciones" [latitude]="ubicacion.latitud" [longitude]="ubicacion.longitud">
       <agm-info-window><h3>{{ubicacion.id_paciente}}</h3></agm-info-window>
     </agm-marker></agm-map>
-  <button (click)="volver($event)">Volver</button>
+  </div>
+  <button type="button" (click)="volver($event)">Volver</button>
 </div>

@@ -13,4 +13,5 @@ export interface Paciente {
   idTipoID?: string;
   integrantes?: string;
   ciudad?: string;
+  edad?: string;
 }

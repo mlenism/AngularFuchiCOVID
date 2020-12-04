@@ -1,4 +1,10 @@
 <div class="content">
   <button (click)="volver($event)">Volver</button>
+  <div>
+    <app-diagrama-infectados-barrio></app-diagrama-infectados-barrio>
+  </div>
+  <div>
+    <app-diagrama-infectados-edad></app-diagrama-infectados-edad>
+  </div>
   <p *ngFor="let estadistica of estadisticasList">{{estadistica.id}}: {{estadistica.nombre}}</p>
 </div>

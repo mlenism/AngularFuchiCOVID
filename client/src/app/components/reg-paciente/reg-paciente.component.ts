@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormBuilder , Validators } from '@angular/forms';
 import { Router } from '@angular/router'
 
@@ -15,7 +15,7 @@ import { Paciente } from '../../models/paciente'
   templateUrl: './reg-paciente.component.html',
   styleUrls: ['./reg-paciente.component.css']
 })
-export class RegPacienteComponent implements OnInit {
+export class RegPacienteComponent {
   
   form: FormGroup;
   medicoList: IdNombre[];
@@ -37,8 +37,6 @@ export class RegPacienteComponent implements OnInit {
     this.llenarBarrio();
     this.llenarTipoId();
   }
-
-  ngOnInit(): void {}
   
   private getPacientes() {
     this.pacienteList = [];
@@ -86,7 +84,8 @@ export class RegPacienteComponent implements OnInit {
         integrantes: ['', [Validators.required]],
         ciudad: ['', [Validators.required]],
         latitud: ['', [Validators.required]],
-        longitud: ['', [Validators.required]]
+        longitud: ['', [Validators.required]],
+        edad: ['', [Validators.required]]
       }
     );
   }
@@ -140,6 +139,7 @@ export class RegPacienteComponent implements OnInit {
     control.ciudad.setValue(paciente.ciudad);
     control.latitud.setValue(paciente.latitud);
     control.longitud.setValue(paciente.longitud);
+    control.edad.setValue(paciente.edad);
   }
 
   regPersonaRelacionada(event: Event) {

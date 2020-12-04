@@ -45,10 +45,7 @@ class VisitaController {
     async setVisita(req, res) {
         try {
             const { doctor, paciente, temperatura, peso, presion, laboratorio, medicamento, dosis, observaciones } = req.body;
-            await database_1.pool.query('INSERT INTO visita (id_paciente, id_profesional_salud, temperatura, peso, presion_arterial, observaciones) '
-                + 'VALUES ($1, $2, $3, $4, $5, $6)', [paciente, doctor, temperatura, peso, presion, observaciones]);
-            await database_1.pool.query('INSERT INTO visita_dosis_diaria (id_laboratorio, id_medicamento, dosis_diaria) '
-                + 'VALUES ($1,$2,$3)', [laboratorio, medicamento, dosis]);
+            await database_1.pool.query('SELECT f_setVisita($1, $2, $3, $4, $5, $6, $7, $8, $9)', [paciente, doctor, temperatura, peso, presion, observaciones, laboratorio, medicamento, dosis]);
             console.log(req.body);
             return res.status(200).send('INSERTADO');
         }

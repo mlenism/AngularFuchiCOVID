@@ -16,4 +16,12 @@ export class EstadisticasService {
   getEstadisticas(): Observable<IdNombre> {
     return this.http.get(this.API_URI);
   }
+
+  getInfectadosXBarrio(): Observable<IdNombre> {
+    return this.http.get(`${this.API_URI}/Infectados-x-barrio`);
+  }
+
+  getInfectadosXEdad(): Observable<IdNombre> {
+    return this.http.get(`${this.API_URI}/Infectados-x-edad`);
+  }
 }

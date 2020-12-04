@@ -113,6 +113,7 @@ CREATE TABLE paciente
     numeroDeIntegrantes SMALLINT NOT NULL,
     ciudad_contagio VARCHAR(50) NOT NULL,
     id_medico VARCHAR(10) NOT NULL,
+    edad SMALLINT NOT NULL,
     PRIMARY KEY (id),
 	  CONSTRAINT "FK_TipoID" FOREIGN KEY (id_tipoID) REFERENCES tipoID(id),
 	  CONSTRAINT "FK_medico" FOREIGN KEY (id_medico) REFERENCES profesional_salud(id)
@@ -284,10 +285,10 @@ INSERT INTO ubicacion_profesional_salud VALUES ('1244222222', 2, 'Cra 1c #60-72'
 INSERT INTO ubicacion_profesional_salud VALUES ('1244333333', 3, 'Cra 1d #40-83');
 INSERT INTO ubicacion_profesional_salud VALUES ('1244444444', 4, 'Cra 1e #30-94');
 
-INSERT INTO paciente VALUES ('1344111111', 'nombre_paciente1', 'apellido_paciente1', '1', 1, 'Cali', '1244111111');
-INSERT INTO paciente VALUES ('1344222222', 'nombre_paciente2', 'apellido_paciente2', '2', 2, 'Bogota', '1244222222');
-INSERT INTO paciente VALUES ('1344333333', 'nombre_paciente3', 'apellido_paciente3', '3', 2, 'Medellin', '1244333333');
-INSERT INTO paciente VALUES ('1344444444', 'nombre_paciente4', 'apellido_paciente4', '4', 3, 'Pereira', '1244444444');
+INSERT INTO paciente VALUES ('1344111111', 'nombre_paciente1', 'apellido_paciente1', '1', 1, 'Cali', '1244111111', 25);
+INSERT INTO paciente VALUES ('1344222222', 'nombre_paciente2', 'apellido_paciente2', '2', 2, 'Bogota', '1244222222', 25);
+INSERT INTO paciente VALUES ('1344333333', 'nombre_paciente3', 'apellido_paciente3', '3', 2, 'Medellin', '1244333333', 28);
+INSERT INTO paciente VALUES ('1344444444', 'nombre_paciente4', 'apellido_paciente4', '4', 3, 'Pereira', '1244444444', 31);
 
 INSERT INTO ubicacion_paciente VALUES ('1344111111', 1, 'Cra 2b #50-61', '3.449960', '-76.510079');
 INSERT INTO ubicacion_paciente VALUES ('1344222222', 2, 'Cra 2c #60-72', '3.417473', '-76.536885');
@@ -322,3 +323,45 @@ INSERT INTO visita_dosis_diaria(id_laboratorio, id_medicamento, dosis_diaria) VA
 INSERT INTO visita_dosis_diaria(id_laboratorio, id_medicamento, dosis_diaria) VALUES ('1', '2', 5);
 INSERT INTO visita_dosis_diaria(id_laboratorio, id_medicamento, dosis_diaria) VALUES ('2', '1', 6);
 INSERT INTO visita_dosis_diaria(id_laboratorio, id_medicamento, dosis_diaria) VALUES ('1', '2', 6);
+
+-- TRIGGER QUE ACTUALIZA EL STOCK --
+CREATE OR REPLACE FUNCTION f_stock_medicamento() RETURNS trigger AS $$
+BEGIN 
+  IF(TG_OP = 'INSERT') THEN 
+    UPDATE laboratorio_medicamento AS labm SET stock = labm.stock - 1 WHERE id_laboratorio = new.id_laboratorio AND id_medicamento = new.id_medicamento;
+  END IF;
+  IF(TG_OP = 'UPDATE') THEN 
+    UPDATE laboratorio_medicamento AS labm SET stock = labm.stock - 1 WHERE id_laboratorio = new.id_laboratorio AND id_medicamento = new.id_medicamento;
+	  UPDATE laboratorio_medicamento AS labm SET stock = labm.stock + 1 WHERE id_laboratorio = old.id_laboratorio AND id_medicamento = old.id_medicamento;
+  END IF;
+  IF(TG_OP = 'DELETE') THEN 
+    UPDATE laboratorio_medicamento AS labm SET stock = labm.stock + 1 WHERE id_laboratorio = old.id_laboratorio AND id_medicamento = old.id_medicamento;
+  END IF;
+  RETURN NULL;
+END
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER change_stock AFTER INSERT OR UPDATE OR DELETE ON visita_dosis_diaria
+FOR EACH ROW EXECUTE PROCEDURE f_stock_medicamento();
+
+-- FUNCION PARA CREAR UNA VISITA EN UNA SOLA PETICIÓN AL GESTOR DE BASES DE DATOS --
+CREATE OR REPLACE FUNCTION f_setVisita(varchar,varchar,numeric,numeric,varchar,varchar,varchar,varchar,numeric) RETURNS integer as $$
+DECLARE 
+idpaciente ALIAS FOR $1;
+idprofesionalsalud alias for $2;
+temperatur alias for $3;
+pes alias for $4;
+presionarterial alias for $5;
+observacion alias for $6;
+idlaboratorio alias for $7;
+idmedicamento alias for $8;
+dosisdiaria alias for $9;
+
+BEGIN 
+  INSERT INTO visita (id_paciente, id_profesional_salud, temperatura, peso, presion_arterial, observaciones) 
+  VALUES (idpaciente, idprofesionalsalud, temperatur, pes, presionarterial, observacion);
+  
+  INSERT INTO visita_dosis_diaria (id_laboratorio, id_medicamento, dosis_diaria) VALUES (idlaboratorio,idmedicamento,dosisdiaria);
+  RETURN 1;
+END 
+$$ language plpgsql;

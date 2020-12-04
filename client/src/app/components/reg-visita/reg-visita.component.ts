@@ -111,6 +111,7 @@ export class RegVisitaComponent implements OnInit {
     this.visitaService.setVisita(value).subscribe(
       res => {
         this.getVisitas();
+        this.tryGetStock();
         console.log(res);
       },
       err => console.error(err)
@@ -123,6 +124,7 @@ export class RegVisitaComponent implements OnInit {
     this.visitaService.updateVisita(value).subscribe(
       res => {
         this.getVisitas();
+        this.tryGetStock();
         console.log(res);
       },
       err => console.error(err)
@@ -135,6 +137,7 @@ export class RegVisitaComponent implements OnInit {
     this.visitaService.deleteVisita(value).subscribe(
       res => {
         this.getVisitas();
+        this.tryGetStock();
         console.log('BORRADO');
       },
       err => console.error(err)

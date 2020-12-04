@@ -12,6 +12,8 @@ class EstadiasticasRouter {
     
     config() {
         this.router.get('/', estadisticasController.getEstadisticas);
+        this.router.get('/Infectados-x-barrio', estadisticasController.getInfectadosPorBarrio);
+        this.router.get('/Infectados-x-edad', estadisticasController.getInfectadosPorEdad);
     }
 }
 

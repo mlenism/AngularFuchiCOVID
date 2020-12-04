@@ -19,7 +19,8 @@ class PacienteController {
             +'tipo.nombre as "tipoID",'
             +'pac.id_tipoid as "idTipoID",'
             +'pac.numerodeintegrantes as integrantes,'
-            +'pac.ciudad_contagio as ciudad '
+            +'pac.ciudad_contagio as ciudad, '
+            +'pac.edad '
             
             +'from paciente as pac join ubicacion_paciente as ubic on pac.id=ubic.id_paciente '
             +'join barrio as barr on ubic.id_barrio=barr.id '
@@ -35,9 +36,9 @@ class PacienteController {
 
     public async setPacientes(req: Request, res: Response): Promise<Response> {
         try {
-            const { id_miembro_secretaria, id, nombre, apellido, medico, direccion, barrio, tipoID, integrantes, ciudad, latitud, longitud} = req.body;
-            await pool.query('INSERT INTO paciente (id, nombre, apellido, id_tipoid, numerodeintegrantes, ciudad_contagio, id_medico) '
-                +'VALUES ($1, $2, $3, $4, $5, $6, $7)', [id, nombre, apellido, tipoID, integrantes, ciudad, medico]);            
+            const { id_miembro_secretaria, id, nombre, apellido, medico, direccion, barrio, tipoID, integrantes, ciudad, latitud, longitud, edad} = req.body;
+            await pool.query('INSERT INTO paciente (id, nombre, apellido, id_tipoid, numerodeintegrantes, ciudad_contagio, id_medico, edad) '
+                +'VALUES ($1, $2, $3, $4, $5, $6, $7, $8)', [id, nombre, apellido, tipoID, integrantes, ciudad, medico, edad]);            
             await pool.query('INSERT INTO registro_paciente (id_miembro_secretaria_salud, id_paciente) VALUES ($1, $2)', [id_miembro_secretaria, id]);            
             await pool.query('INSERT INTO ubicacion_paciente (id_paciente, id_barrio, direccion, latitud, longitud) VALUES ($1,$2,$3,$4,$5)', [id, barrio, direccion, latitud, longitud]);
 
@@ -50,9 +51,9 @@ class PacienteController {
 
     public async updatePacientes(req: Request, res: Response): Promise<Response> {
         try {
-            const { id_miembro_secretaria, id, nombre, apellido, medico, direccion, barrio, tipoID, integrantes, ciudad, latitud, longitud} = req.body;
-            await pool.query('UPDATE paciente SET nombre = $1, apellido = $2, id_tipoid = $3, numerodeintegrantes = $4, ciudad_contagio = $5, id_medico = $6 '
-                +'WHERE id = $7', [nombre, apellido, tipoID, integrantes, ciudad, medico, id]);
+            const { id_miembro_secretaria, id, nombre, apellido, medico, direccion, barrio, tipoID, integrantes, ciudad, latitud, longitud, edad} = req.body;
+            await pool.query('UPDATE paciente SET nombre = $1, apellido = $2, id_tipoid = $3, numerodeintegrantes = $4, ciudad_contagio = $5, id_medico = $6, '
+                +'edad = $7 WHERE id = $8', [nombre, apellido, tipoID, integrantes, ciudad, medico, edad, id]);
             await pool.query('UPDATE ubicacion_paciente SET id_barrio = $1, direccion = $2, latitud = $3, longitud = $4 WHERE id_paciente = $5', [barrio, direccion, latitud, longitud, id]);
             return res.status(200).send('ACTUALIZADO');
         } catch (e) {

@@ -22,7 +22,8 @@ class LaboratorioMedicamentoController {
                 +'labme.stock '
             
                 +'from laboratorio as lab '
-                +'join laboratorio_medicamento as labme on labme.id_laboratorio=lab.id');
+                +'join laboratorio_medicamento as labme on labme.id_laboratorio=lab.id '
+                +'order by labme.id_laboratorio, labme.id_medicamento');
             return res.status(200).json(labMedicamentos.rows);
         } catch (e) {
             console.log(e);

@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AgmCoreModule} from '@agm/core'
+import { AgmCoreModule} from '@agm/core';
+import { ChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app/app.component';
@@ -34,6 +35,8 @@ import { PacienteGuard } from './guards/paciente.guard';
 import { MedicoGuard } from './guards/medico.guard';
 import { SecretariaGuard } from './guards/secretaria.guard';
 import { LoginGuard } from './guards/login.guard';
+import { DiagramaInfectadosBarrioComponent } from './components/diagrama-infectados-barrio/diagrama-infectados-barrio.component';
+import { DiagramaInfectadosEdadComponent } from './components/diagrama-infectados-edad/diagrama-infectados-edad.component';
 
 @NgModule({
   declarations: [
@@ -50,13 +53,16 @@ import { LoginGuard } from './guards/login.guard';
     RegVisitaComponent,
     StockMedicamentosComponent,
     MapaComponent,
-    InformeComponent
+    InformeComponent,
+    DiagramaInfectadosBarrioComponent,
+    DiagramaInfectadosEdadComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ChartsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCUtMHRooNwcLksKKoG8fk9BvG1Z2C0tog'
     })

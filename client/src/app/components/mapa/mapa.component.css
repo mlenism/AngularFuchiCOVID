@@ -15,7 +15,11 @@ button {
   font-weight: bold;
 }
 
-agm-map{
-  height: 400px;
-  width: 400px;
+agm-map {
+  height: 500px;
+  width: 500px;
+}
+
+div {
+  margin-bottom: 2%;
 }

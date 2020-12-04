@@ -1,15 +1,19 @@
 .inicio-sesion {
-  width: 200px;
-  height: 110px;
+  width: 400px;
+  height: 260px;
   display: flex;
   margin: 82px auto 0px;
-  padding: 23px;
+  padding-top: 30px;
+  padding-left: 25px;
+  padding-right: 10px;
   flex-direction: column;
   align-items: center;
   background: #ffe689;
+  font-size: 25px;
 }
 
 .inicio-sesion input {
   width: 95%;
-  margin-bottom: 20px;
+  height: 25%;
+  margin-bottom: 7%;
 }

@@ -7,7 +7,7 @@
     <button (click)="crear($event)" [disabled]="form.invalid">CREAR</button>
     <button (click)="actualizar($event)" [disabled]="form.invalid">ACTUALIZAR</button>
     <button (click)="borrar($event)" [disabled]="form.invalid">BORRAR</button>
-    <button routerLink="/SecSalud">VOLVER</button>
+    <button type="button" routerLink="/SecSalud">VOLVER</button>
 
     <table>
       <tr>
@@ -21,9 +21,7 @@
           <input type="text" formControlName="apellido">
         </td>
         <td>
-          <select formControlName="medico">
-            <option *ngFor="let medico of medicoList" value={{medico.id}}>{{medico.nombre}}</option>
-          </select>
+          <input type="text" formControlName="edad">
         </td>
         <td>
           <input type="text" formControlName="direccion">
@@ -50,22 +48,28 @@
         <td>
           <input type="longitud" formControlName="longitud">
         </td>
+        <td>
+          <select formControlName="medico">
+            <option *ngFor="let medico of medicoList" value={{medico.id}}>{{medico.nombre}}</option>
+          </select>
+        </td>
       </tr>
     </table>
-
+    
     <table id="contenido">
       <thead>
         <tr>
           <th>IDENTIFICACIÓN</th>
           <th>NOMBRE</th>
           <th>APELLIDO</th>
-          <th>MEDICO A CARGO</th>
+          <th>EDAD</th>
           <th>DIRECCION</th>
           <th>BARRIO</th>
           <th>TIPO DE ID</th>
           <th>No INTEGRANTES</th>
           <th>CIUDAD DE CONTAGIO</th>
           <th>GEOLOCALIZACION</th>
+          <th>MEDICO A CARGO</th>
         </tr>
       </thead>
       <tbody>
@@ -73,13 +77,14 @@
           <td>{{paciente.id}}</td>
           <td>{{paciente.nombre}}</td>
           <td>{{paciente.apellido}}</td>
-          <td>{{paciente.medico}}</td>
+          <td>{{paciente.edad}}</td>
           <td>{{paciente.direccion}}</td>
           <td>{{paciente.barrio}}</td>
           <td>{{paciente.tipoID}}</td>
           <td>{{paciente.integrantes}}</td>
           <td>{{paciente.ciudad}}</td>
           <td>{{paciente.latitud}}, {{paciente.longitud}}</td>
+          <td>{{paciente.medico}}</td>
         </tr>
       </tbody>
     </table>
